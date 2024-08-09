@@ -1,6 +1,6 @@
 const tshirtCard = [
   {
-    image: "/src/assets/images/alireza.jpg",
+    image: "/src/assets/images/BlackLogo.png",
     hoverImage: "/src/assets/images/BlackLogo2.png",
     content: "Content for the first image",
     name: "solomandaras",
