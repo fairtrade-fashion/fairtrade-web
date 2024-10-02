@@ -5,7 +5,6 @@ import ShopAccessories from "../component/shop_accessories";
 import ShopJeans from "../component/shop_jeans";
 import ShopShirt from "../component/shop_shirt";
 import ShopTshirts from "../component/shop_T-shirts";
-import SubscribeNow from "../component/subscribe_now";
 
 export default function HomeView() {
   return (
@@ -17,7 +16,6 @@ export default function HomeView() {
       <ShopShirt />
       <DeliverDoorstep />
       <ShopAccessories />
-      <SubscribeNow />
     </div>
   );
 }

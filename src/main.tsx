@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import appRouter from "./config/routes.tsx";
-import { store } from "./app/store.tsx";
+import { store } from "./config/store.tsx";
 
 const routes = createBrowserRouter(appRouter());
 ReactDOM.createRoot(document.getElementById("root")!).render(

@@ -9,10 +9,10 @@ export default function AppLayout() {
         <header>
           <AppHeaderComp />
         </header>
-        <section className="min-h-screen w-full">
+        <section className="min-h-screen bg-gray-50 w-full">
           <Outlet />
         </section>
-        <footer className="mt-10">
+        <footer>
           <AppFooterComp />
         </footer>
       </main>
