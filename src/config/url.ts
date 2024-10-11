@@ -1,3 +1,3 @@
-const localUrl = "https://fairtrade-api-development.up.railway.app/api/v1/";
+const localUrl ="http://x80w80sk0wosss48gwkc88o0.45.136.18.133.sslip.io/api/v2/";
 
 export const BASE_URL = localUrl;

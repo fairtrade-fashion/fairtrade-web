@@ -8,11 +8,12 @@ import { useLoginMutation } from "@/domain/auth/api/login.api";
 import { ArrowBigLeftDashIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "@/assets/images/BlackLogo.png";
+import { LoginValue } from "@/models/request/login_value.model";
+import { LoginRoot } from "@/models/response/login.model";
 
 interface ApiError {
   data?: {
     message?: string;
-    error?: string;
   };
   status?: number;
 }
@@ -33,27 +34,25 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   // Handle form submission
-  const handleSubmit = async (values: { email: string; password: string }) => {
+  const handleSubmit = async (values: LoginValue) => {
+    console.log("Submitting form with values:", values);
     try {
-      const response = await login(values).unwrap();
-      console.log("Login successful", response);
-      // Store token in local storage
-      localStorage.setItem("access_token", response.token);
-      toast.success("Login successful");
-
-      // navigate to another page (home page)
-      navigate("/");
+      const response: LoginRoot = await login(values).unwrap();
+      if (response.access_token) {
+        console.log("Login successful", response);
+        localStorage.setItem("access_token", response.access_token);
+        toast.success("Login successful");
+        navigate("/");
+      }
     } catch (error) {
       console.error("Login failed", error);
-
       const apiError = error as ApiError;
       let errorMessage = "Login failed";
-      if (apiError.data?.message) {
-        errorMessage = apiError.data.message;
+      if (apiError.data) {
+        errorMessage = apiError.data.message || "An error occurred";
       } else if (apiError.status === 401) {
         errorMessage = "Invalid credentials";
       }
-
       toast.error(errorMessage);
     }
   };
@@ -150,7 +149,7 @@ const Login: React.FC = () => {
                   <div className="flex items-center">
                     <Field
                       id="remember-me"
-                      name="remember-me"
+                      name="rememberMe" // Changed to follow camelCase convention
                       type="checkbox"
                       className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded"
                     />
