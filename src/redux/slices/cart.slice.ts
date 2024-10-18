@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "@/lib/product";
 
 // Define the initial state for the cart
-interface CartState {
+export interface CartState {
   cart: CartItem[];
 }
 

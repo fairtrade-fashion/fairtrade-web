@@ -1,42 +1,3 @@
-// import { api } from "@/apis/api";
-// import {
-//   CategoryProductsRoot,
-//   CategoryRoot,
-// } from "@/models/response/category.model";
-
-// export const categoryApi = api.injectEndpoints({
-//   endpoints: (builder) => ({
-//     fetchCategory: builder.query<CategoryRoot, void>({
-//       query: () => ({
-//         providesTags: ["Category"],
-//         method: "GET",
-//         url: "categories",
-//       }),
-//       transformResponse: (response: CategoryRoot) => {
-//         return response;
-//       },
-//     }),
-
-//     // Fetch a category by ID
-//     fetchCategoryProducts: builder.query<CategoryProductsRoot, string>({
-//       query: (categoryId) => ({
-//         providesTags: ["CategoryId"],
-//         method: "GET",
-//         url: `categories/${categoryId}/products`,
-//       }),
-//       transformResponse: (response: CategoryProductsRoot) => {
-//         return response;
-//       },
-//     }),
-//   }),
-// });
-// export const { useFetchCategoryQuery, useFetchCategoryProductsQuery } =
-//   categoryApi;
-
-
-
-
-
 import { api } from "@/apis/api";
 import {
   CategoryProductsRoot,
@@ -61,14 +22,14 @@ export const categoryApi = api.injectEndpoints({
     fetchCategoryProducts: builder.query<
       CategoryProductsRoot,
       {
-        categoryId: string;
+        id: string;
         minPrice?: number;
         maxPrice?: number;
         sizes?: string[];
       }
     >({
-      query: ({ categoryId, minPrice, maxPrice, sizes }) => {
-        let url = `categories/${categoryId}/products`;
+      query: ({ id, minPrice, maxPrice, sizes }) => {
+        let url = `categories/${id}`;
 
         // Add query parameters for price range and sizes if provided
         const params = new URLSearchParams();

@@ -1,7 +1,7 @@
 import { CategoryProductsRoot } from "@/models/response/category.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CategoryState {
+export interface CategoryState {
   selectedCategoryProduct: CategoryProductsRoot | null;
 }
 

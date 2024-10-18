@@ -1,28 +1,27 @@
 import { ProfileRoot } from "@/models/response/profile.model";
-import { api } from "@/apis/api"; // Ensure you import your base API correctly
+import { api } from "@/apis/api";
 
-// Add this to your existing api file
 export const profileApi = api.injectEndpoints({
   endpoints: (builder) => ({
     fetchProfile: builder.query<ProfileRoot, void>({
       query: () => {
-        const token = localStorage.getItem("authToken"); // Get the token from localStorage
+        const token = localStorage.getItem("access_token");
+
         return {
           url: "auth/profile",
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`, // Set the Authorization header
+            Authorization: token ? `Bearer ${token}` : "",
           },
         };
       },
       providesTags: ["Profile"],
       transformResponse: (response: ProfileRoot) => {
-        return response; // Transform response if needed, otherwise just return
+        return response;
       },
     }),
   }),
-  overrideExisting: false, // Ensure you're not overriding existing endpoints
+  overrideExisting: false, 
 });
 
-// Export the auto-generated hook for the `fetchProfile` query
 export const { useFetchProfileQuery } = profileApi;

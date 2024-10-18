@@ -16,9 +16,11 @@ export const loginApi = createApi({
       query: (payload) => ({
         url: "auth/login",
         method: "POST",
-        body: payload,
+        data: payload, // Ensure 'data' is used for the Axios request body
+        headers: {
+          "Content-Type": "application/json", // Set content-type explicitly if needed
+        },
       }),
-      // Handle the response to store the token
       transformResponse: (response: LoginRoot) => {
         if (response.access_token) {
           storeToken("access_token", response.access_token);
@@ -26,7 +28,7 @@ export const loginApi = createApi({
         return response;
       },
       invalidatesTags: ["Auth"],
-    }),
+    }), 
   }),
 });
 

@@ -44,9 +44,9 @@ const ProductPage: React.FC = () => {
 
     dispatch(
       addToCart({
-        id: productData.product_id,
+        id: productData.id,
         name: productData.name,
-        image: productData.productImages[0].imageUrl,
+        image: productData.images[0].url,
         selectedSize,
         selectedColor,
         amount: productData.price,
@@ -65,29 +65,29 @@ const ProductPage: React.FC = () => {
           <div className="overflow-hidden rounded-lg">
             <img
               className="w-full rounded-lg transition-transform duration-300 ease-in-out hover:scale-110"
-              src={productData.productImages[0].imageUrl}
-              alt={productData.productImages[0].imageUrl}
+              src={productData.images[0].url}
+              alt={productData.images[0].url}
             />
           </div>
           <div className="flex space-x-4">
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
-              src={productData.productImages[0].imageUrl} // Update to use different URLs if available
+              src={productData.images[0].url} // Update to use different URLs if available
               alt="Thumbnail 1"
             />
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
               src={
-                productData.productImages[1]?.imageUrl ||
-                productData.productImages[0].imageUrl
+                productData.images[1]?.url ||
+                productData.images[0].url
               } // Fallback to the first image if not available
               alt="Thumbnail 2"
             />
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
               src={
-                productData.productImages[2]?.imageUrl ||
-                productData.productImages[0].imageUrl
+                productData.images[2]?.url ||
+                productData.images[0].url
               } // Fallback to the first image if not available
               alt="Thumbnail 3"
             />
@@ -165,7 +165,7 @@ const ProductPage: React.FC = () => {
               </li>
               <li>
                 <strong>Available Stock Quantity:</strong>{" "}
-                {productData.stockQuantity}
+                {productData.stock}
               </li>
               <li className="capitalize">
                 <strong>Available Colors: </strong>

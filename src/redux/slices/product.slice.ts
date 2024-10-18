@@ -2,7 +2,7 @@ import { CartItem } from "@/lib/product";
 import { ProductData } from "@/models/response/product.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ProductState {
+export interface ProductState {
   cart: CartItem[];
   selectedProduct: ProductData | null;
 }

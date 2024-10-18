@@ -6,7 +6,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "http://x80w80sk0wosss48gwkc88o0.45.136.18.133.sslip.io/api/v2/",
   prepareHeaders: (headers) => {
     const token = fetchToken("access_token");
-    console.log("Fetched Token:", token);
+    // console.log("Fetched Token:", token);
     const authHeaders = {
       Accept: "application/json",
       "Content-Type": "application/json",

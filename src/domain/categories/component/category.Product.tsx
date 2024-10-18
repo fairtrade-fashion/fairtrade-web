@@ -79,6 +79,8 @@
 //   );
 // }
 
+
+
 import { useFetchCategoryProductsQuery } from "@/domain/categories/categories.api/category.api";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -93,9 +95,9 @@ export default function CategoryProduct({
   maxPrice,
   selectedSizes,
 }: CategoryProductProps) {
-  const { category, categoryId } = useParams<{
+  const { category, id } = useParams<{
     category: string;
-    categoryId: string;
+    id: string;
   }>();
   const navigate = useNavigate();
 
@@ -106,15 +108,16 @@ export default function CategoryProduct({
     isError,
   } = useFetchCategoryProductsQuery(
     {
-      categoryId: categoryId as string,
+      id: id as string,
       minPrice,
       maxPrice,
       sizes: selectedSizes,
     },
     {
-      skip: !categoryId, // Skip the query if categoryId is undefined
+      skip: !id, // Skip the query if categoryId is undefined
     }
   );
+  // console.log("ID:", id);
 
   const handleBuyNow = (id: string) => {
     navigate(`/product/${id}`);
@@ -141,6 +144,8 @@ export default function CategoryProduct({
     );
   }
 
+  // console.log("Fetched Products:", CategoryProducts);
+
   return (
     <div>
       <h1 className="text-3xl uppercase text-center md:my-5 lg:my-10 font-bold my-5">
@@ -148,13 +153,17 @@ export default function CategoryProduct({
       </h1>
 
       <div className="grid grid-cols-1 px-5 md:px-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-5 mt-10">
+        {CategoryProducts?.products.length === 0 && (
+          <p>No products found for this category.</p>
+        )}
+
         {CategoryProducts?.products.map((product) => (
           <div
-            key={product.product_id}
+            key={product.id}
             className="group relative block overflow-hidden rounded-lg hover:drop-shadow-md hover:scale-[1.02] transition-all delay-200"
           >
             <img
-              src={product.productImages[0]?.imageUrl}
+              src={product.images[0]?.url}
               alt={product.name}
               className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
             />
@@ -166,9 +175,11 @@ export default function CategoryProduct({
               <h3 className="mt-4 text-lg font-medium text-gray-900">
                 {product.name}
               </h3>
-              <p className="mt-1.5 text-sm text-gray-700">{product.price}</p>
+              <p className="mt-1.5 text-sm text-gray-700">
+                ₦{product.price.toLocaleString()}
+              </p>
               <button
-                onClick={() => handleBuyNow(product.product_id)}
+                onClick={() => handleBuyNow(product.id)}
                 className="block w-full rounded bg-gray-700 text-white p-4 text-sm font-medium transition hover:scale-105"
               >
                 Buy Now
