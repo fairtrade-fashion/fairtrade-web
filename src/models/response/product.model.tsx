@@ -7,22 +7,24 @@ export interface ProductRoot {
 }
 
 export interface ProductData {
-  product_id: string;
+  id: string;
   name: string;
   description: string;
   price: number;
-  stockQuantity: number;
-  category_id: string;
+  sku: string;
+  stock: number;
+  categoryId: string;
   createdAt: string;
   updatedAt: string;
   category: Category;
-  productImages: ProductImage[];
+  averageRating: string;
+  images: ProductImage[];
   sizes: Size[];
   colors: Color[];
 }
 
 export interface Category {
-  category_id: string;
+  id: string;
   name: string;
   description: string;
   createdAt: string;
@@ -30,10 +32,7 @@ export interface Category {
 }
 
 export interface ProductImage {
-  image_id: string;
-  product_id: string;
-  imageUrl: string;
-  createdAt: string;
+  url: string;
 }
 
 export interface Size {

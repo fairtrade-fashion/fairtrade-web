@@ -26,7 +26,7 @@ export default function appRouter(): RouteObject[] {
           path: "home",
           element: <HomeView />,
         },
-        { path: "/category/:category/:categoryId", element: <CategoryView /> },
+        { path: "/category/:category/:id", element: <CategoryView /> },
         { path: "/product/:id", element: <ProductPage /> },
         {
           path: "/cart",

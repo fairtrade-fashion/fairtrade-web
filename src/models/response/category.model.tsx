@@ -1,38 +1,38 @@
 export type CategoryRoot = CategoryData[];
 
 export interface CategoryData {
-  category_id: string;
+  id: string;
   name: string;
-  description: string;
+  parentId: string | null;
   createdAt: string;
   updatedAt: string;
+  parent?: CategoryData | null;
+  children: CategoryData[];
 }
 
 
 export interface CategoryProductsRoot {
   products: Product[];
-  pagination: Pagination;
+  pagination?: Pagination;
 }
 
 export interface Product {
-  product_id: string;
+  id: string;
   name: string;
   description: string;
   price: number;
-  stockQuantity: number;
-  category_id: string;
+  stock: number;
+  categoryId: string;
   createdAt: string;
   updatedAt: string;
-  productImages: ProductImage[];
+  avarageRating: string;
+  images: ProductImage[];
   sizes: Size[];
   colors: Color[];
 }
 
 export interface ProductImage {
-  image_id: string;
-  product_id: string;
-  imageUrl: string;
-  createdAt: string;
+  url: string;
 }
 
 export interface Size {

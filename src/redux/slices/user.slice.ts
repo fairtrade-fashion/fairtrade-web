@@ -1,7 +1,7 @@
 // userSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface UserState {
+export interface UserState {
   name: string;
   email: string;
   profilePicture: string;
