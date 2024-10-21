@@ -17,7 +17,7 @@ export default function ShopTshirts() {
       <h1 className="text-center text-3xl font-semibold text-gray-800 mt-16">
         Shop T-Shirts
       </h1>
-      <div className="md:grid my-5 pb-2 px-2 md:px-10 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 w-full overflow-auto flex ">
+      <div className="grid my-5 pb-2 px-2 md:px-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 w-full">
         {card.map((item) => (
           <div
             key={item.id}
@@ -30,25 +30,21 @@ export default function ShopTshirts() {
                 className="object-cover w-full h-52 lg:h-96 hover:bg-white hover:blur-xs hover:opacity-80"
               />
             </div>
-            <div className="p-2">
-              <div className="flex items-center justify-between gap-4 mb-2">
-                <p className=" text-base antialiased font-bold capitalize leading-relaxed text-gray-900">
-                  {item.name}
-                </p>
-                <p className=" text-base antialiased font-medium leading-relaxed md:0 text-gray-500">
-                  ₦{item.price}
-                </p>
-              </div>
+            <div className="items-center p-2 text-center justify-center gap-4 md:mb-2">
+              <p className="text-sm md:text-base antialiased font-bold capitalize leading-relaxed text-gray-900">
+                {item.name}
+              </p>
+              <p className="text-sm md:text-base antialiased font-medium leading-relaxed md:0 text-gray-500">
+                ₦{item.price}
+              </p>
             </div>
-            <div className="p-6">
-              <button
-                onClick={() => handleBuyNow(item)}
-                className="align-middle bg-gray-700 text-white font-bold text-center uppercase transition-all text-xs py-2 md:py-3 px-6  w-full text-blue-gray-900 hover:scale-105"
-                type="button"
-              >
-                BUY NOW
-              </button>
-            </div>
+            <button
+              onClick={() => handleBuyNow(item)}
+              className="align-middle bg-gray-600 hover:bg-gray-800 ease-in-out duration-300 text-white font-bold text-center uppercase transition-all text-xs py-2 md:py-3  w-full text-blue-gray-900"
+              type="button"
+            >
+              BUY NOW
+            </button>
           </div>
         ))}
       </div>

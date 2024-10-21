@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 import appRouter from "./config/routes.tsx";
 import { store } from "./config/store.tsx";
+import WhatsAppButton from "./component/ui/whtasapp.tsx";
 
 const routes = createBrowserRouter(appRouter());
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <RouterProvider router={routes} />
       <Toaster position="top-right" richColors closeButton />
+      <WhatsAppButton />
     </Provider>
   </React.StrictMode>
 );

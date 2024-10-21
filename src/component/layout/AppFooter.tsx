@@ -37,11 +37,11 @@ export default function AppFooter() {
         <SubscribeNow />
       </div>
       <footer className="text-gray-900 bg-white items-center my-4 md:mb-16">
-        <div className="md:container md:mx-auto px-4 md:px-10 py-5 pb-5 grid grid-cols-2 gap-16 lg:grid-cols-4">
-          <div className="w-28 md:w-40 h-8 md:h-16">
+        <div className="md:container md:mx-auto px-4 md:px-10 py-5 pb-5 grid grid-cols-1 gap-4 md:gap-16 lg:grid-cols-4">
+          <div className="">
             <Link to="/home">
               <img
-                className=""
+                className="w-32 md:w-40 h-10 md:h-16"
                 src="/src/assets/images/fair-trade-transparent.png"
                 alt="Fair Trade Logo"
               />
@@ -64,7 +64,7 @@ export default function AppFooter() {
               </a>
             </div>
           </div>
-          <div>
+          <div className="">
             <h1 className="text-2xl font-bold">Menu</h1>
             <ul className=" items-center text-base xl:text-xl mt-2 font-medium">
               {data

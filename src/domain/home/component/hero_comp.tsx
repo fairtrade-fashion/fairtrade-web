@@ -17,9 +17,9 @@ export default function HeroComp() {
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
             WELCOME TO FAIR TRADE
           </h1>
-          <button className="mt-8 text-lg px-16 py-4 bg-white hover:bg-transparent border-4 border-white hover:border-4 hover:border-white hover:text-white text-black font-bold rounded-md transition-all duration-300">
+          {/* <button className="mt-8 text-lg px-16 py-4 bg-white hover:bg-transparent border-4 border-white hover:border-4 hover:border-white hover:text-white text-black font-bold rounded-md transition-all duration-300">
             Shop Now
-          </button>
+          </button> */}
         </div>
       </div>
     </>
