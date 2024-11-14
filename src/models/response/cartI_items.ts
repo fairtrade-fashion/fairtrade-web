@@ -33,8 +33,15 @@ export interface CartRoot {
   items: CartItem[];
 }
 
-
 export interface CartRemove {
   id: string;
   message: string;
+}
+
+export interface StreamLinedCartRoot {
+  id: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  items: CartItem;
 }
