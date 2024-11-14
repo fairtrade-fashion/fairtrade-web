@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 
 const CartPage: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.cart || []);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,6 +41,21 @@ const CartPage: React.FC = () => {
         quantity: 0,
         description: "",
         content: "",
+        cartId: "",
+        productId: "",
+        price: 0,
+        product: {
+          id: "",
+          name: "",
+          description: "",
+          price: 0,
+          sku: "",
+          stock: 0,
+          categoryId: "",
+          createdAt: "",
+          updatedAt: "",
+          averageRating: null,
+        },
       })
     );
   };
@@ -47,7 +65,11 @@ const CartPage: React.FC = () => {
   };
 
   const handleCheckout = () => {
-    navigate("/checkout");
+    if (isAuthenticated) {
+      navigate("/checkout");
+    } else {
+      navigate("/login");
+    }
   };
 
   const calculateSubtotal = () => {
@@ -57,12 +79,8 @@ const CartPage: React.FC = () => {
     );
   };
 
-  const calculateVAT = () => {
-    return calculateSubtotal() * 0.075;
-  };
-
   const calculateTotal = () => {
-    return calculateSubtotal() + calculateVAT();
+    return calculateSubtotal();
   };
 
   return (
@@ -95,7 +113,9 @@ const CartPage: React.FC = () => {
                       <dl className="mt-0.5 space-y-px text-sm text-gray-600">
                         <div className="space-x-1">
                           <h1 className="inline">Size:</h1>
-                          <p className="inline">{item.selectedSize}</p>
+                          <p className="inline capitalize">
+                            {item.selectedSize}
+                          </p>
                         </div>
                         <div className="space-x-1">
                           <h1 className="inline">Color:</h1>
@@ -130,7 +150,7 @@ const CartPage: React.FC = () => {
                               parseInt(e.target.value, 10)
                             )
                           }
-                          className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                          className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 focus:outline-none"
                         />
                       </form>
                       <button
@@ -173,10 +193,6 @@ const CartPage: React.FC = () => {
                   <span className="text-gray-500">Subtotal</span>
                   <span className="text-gray-900">₦{calculateSubtotal()}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-500">VAT (7.5%)</span>
-                  <span className="text-gray-900">₦{calculateVAT()}</span>
-                </div>
                 <div className="flex justify-between font-semibold">
                   <span>Total</span>
                   <span>₦{calculateTotal()}</span>
@@ -184,7 +200,7 @@ const CartPage: React.FC = () => {
                 <div className="flex justify-between gap-2">
                   <button
                     onClick={handleClearCart}
-                    className="inline-block rounded-lg bg-gray-900 px-12 py-3 text-sm font-medium text-white shadow transition hover:bg-gray-800"
+                    className="inline-block rounded-lg bg-red-500 px-12 py-3 text-sm font-medium text-white shadow transition hover:bg-red-400"
                   >
                     Clear Cart
                   </button>

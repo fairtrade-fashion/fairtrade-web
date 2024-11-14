@@ -19,10 +19,21 @@ export interface ProductData {
   category: Category;
   averageRating: string;
   images: ProductImage[];
-  sizes: Size[];
-  colors: Color[];
+  sizes: SizeStock[];
+  colors: ColorStock[];
 }
 
+export interface SizeStock {
+  id: string;
+  stock: number;
+  size: Size;
+}
+
+export interface ColorStock {
+  id: string;
+  stock: number;
+  color: Color;
+}
 export interface Category {
   id: string;
   name: string;
@@ -30,17 +41,16 @@ export interface Category {
   createdAt: string;
   updatedAt: string;
 }
-
 export interface ProductImage {
+  id: string,
   url: string;
 }
-
 export interface Size {
-  size_id: string;
+  id: string;
   name: string;
 }
 
 export interface Color {
-  color_id: string;
+  id: string;
   name: string;
 }

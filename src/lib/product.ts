@@ -29,6 +29,7 @@ export const card: ProductData[] = [
     images: [
       {
         url: "https://images.unsplash.com/photo-1603871165848-0aa92c869fa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80",
+        id: ""
       },
     ],
     name: "solomandaras",
@@ -55,6 +56,7 @@ export const card: ProductData[] = [
     images: [
       {
         url: "https://images.unsplash.com/photo-1588515724527-074a7a56616c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+        id: ""
       },
     ],
     name: "solomandaras",
@@ -81,6 +83,7 @@ export const card: ProductData[] = [
     images: [
       {
         url: "https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+        id: ""
       },
     ],
     name: "solomandaras",
@@ -107,6 +110,7 @@ export const card: ProductData[] = [
     images: [
       {
         url: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        id: ""
       },
     ],
     name: "solomandaras",

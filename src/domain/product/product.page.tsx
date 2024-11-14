@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { addToCart } from "@/redux/slices/cart.slice";
 import { useFetchProductIdQuery } from "./product.api/product.api";
+import { useAddItemToCartMutation, useGetOrCreateCartQuery } from "../cart/cart_api/cart.api";
+import { ProfileRoot } from "@/models/response/profile.model";
 
 const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const userId = useSelector((state: ProfileRoot) => state.userId);
+  const { data: cart } = useGetOrCreateCartQuery(userId);
+  const [addItemToCart] = useAddItemToCartMutation();
   const {
     data: productData,
     isLoading,
@@ -53,13 +58,33 @@ const ProductPage: React.FC = () => {
         quantity: 1,
         description: productData.description,
         content: "",
+        cartId: "",
+        productId: "",
+        price: 0,
+        product: {
+          id: "",
+          name: "",
+          description: "",
+          price: 0,
+          sku: "",
+          stock: 0,
+          categoryId: "",
+          createdAt: "",
+          updatedAt: "",
+          averageRating: null
+        }
       })
     );
+    addItemToCart({
+      cartId: cart?.id || "",
+      productId: productData.id,
+      quantity: 1,
+    });
     toast.success("Item added to cart!");
   };
 
   return (
-    <div className="container mx-auto mt-10 p-4">
+    <div className="container mx-auto pt-10 p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="overflow-hidden rounded-lg">
@@ -77,28 +102,22 @@ const ProductPage: React.FC = () => {
             />
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
-              src={
-                productData.images[1]?.url ||
-                productData.images[0].url
-              } // Fallback to the first image if not available
+              src={productData.images[1]?.url || productData.images[0].url} // Fallback to the first image if not available
               alt="Thumbnail 2"
             />
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
-              src={
-                productData.images[2]?.url ||
-                productData.images[0].url
-              } // Fallback to the first image if not available
+              src={productData.images[2]?.url || productData.images[0].url} // Fallback to the first image if not available
               alt="Thumbnail 3"
             />
           </div>
         </div>
 
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h1 className="text-3xl capitalize font-bold text-gray-800">
             {productData.name}
           </h1>
-          <p className="text-xl text-gray-600 mt-2">
+          <p className="text-xl capitalize text-gray-600 mt-2">
             {productData.description}
           </p>
           <div className="flex items-center mt-4">
@@ -111,17 +130,17 @@ const ProductPage: React.FC = () => {
           <div className="mt-6">
             <h2 className="text-lg font-semibold">Select Size</h2>
             <div className="flex space-x-4 mt-2">
-              {productData.sizes.map((size) => (
+              {productData.sizes.map((sizeStock) => (
                 <button
-                  key={size.size_id} // Use size_id for the key
+                  key={sizeStock.id}
                   className={`py-2 px-4 border capitalize rounded-lg ${
-                    selectedSize === size.name
+                    selectedSize === sizeStock.size.name
                       ? "bg-gray-700 text-white"
                       : "bg-gray-100 text-gray-800"
                   }`}
-                  onClick={() => setSelectedSize(size.name)}
+                  onClick={() => setSelectedSize(sizeStock.size.name)}
                 >
-                  {size.name}
+                  {sizeStock.size.name}
                 </button>
               ))}
             </div>
@@ -131,17 +150,17 @@ const ProductPage: React.FC = () => {
           <div className="mt-6">
             <h2 className="text-lg font-semibold">Select Color</h2>
             <div className="flex space-x-4 mt-2">
-              {productData.colors.map((color) => (
+              {productData.colors.map((colorStock) => (
                 <button
-                  key={color.color_id} // Use color_id for the key
+                  key={colorStock.id}
                   className={`py-2 px-4 border capitalize rounded-lg ${
-                    selectedColor === color.name
+                    selectedColor === colorStock.color.name
                       ? "bg-gray-700 text-white"
                       : "bg-gray-100 text-gray-800"
                   }`}
-                  onClick={() => setSelectedColor(color.name)}
+                  onClick={() => setSelectedColor(colorStock.color.name)}
                 >
-                  {color.name}
+                  {colorStock.color.name}
                 </button>
               ))}
             </div>
@@ -161,20 +180,24 @@ const ProductPage: React.FC = () => {
             <h2 className="text-lg font-bold text-gray-800">Product Details</h2>
             <ul className="list-disc list-inside text-gray-600 mt-2">
               <li>
-                <strong>Description:</strong> {productData.description}
+                <strong>Description:</strong>
+                <span className="capitalize">{productData.description}</span>
               </li>
               <li>
-                <strong>Available Stock Quantity:</strong>{" "}
-                {productData.stock}
+                <strong>Available Stock Quantity:</strong> {productData.stock}
               </li>
               <li className="capitalize">
                 <strong>Available Colors: </strong>
-                {productData.colors.map((color) => color.name).join(", ")}
+                {productData.colors
+                  .map((colorStock) => colorStock.color.name)
+                  .join(", ")}
               </li>
 
               <li className="capitalize">
                 <strong>Available Size: </strong>
-                {productData.sizes.map((size) => size.name).join(", ")}
+                {productData.sizes
+                  .map((sizeStock) => sizeStock.size.name)
+                  .join(", ")}
               </li>
             </ul>
           </div>

@@ -6,6 +6,7 @@ import cartReducer from "../redux/slices/cart.slice";
 import userReducer from "@/redux/slices/user.slice";
 import { api } from "@/apis/api";
 import { loginApi } from "@/domain/auth/api/login.api";
+import authReducer from "../redux/slices/auth.slice"
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     user: userReducer,
     category: categoryReducer,
     products: productReducer,
+    auth: authReducer,
     cart: cartReducer,
     
   },
