@@ -172,7 +172,7 @@ export default function CategoryProduct({
               <span className="whitespace-nowrap bg-gray-200 px-3 py-1.5 text-xs font-medium">
                 New Arrival
               </span>
-              <h3 className="mt-4 text-lg font-medium text-gray-900">
+              <h3 className="mt-4 text-lg capitalize font-medium text-gray-900">
                 {product.name}
               </h3>
               <p className="mt-1.5 text-sm text-gray-700">

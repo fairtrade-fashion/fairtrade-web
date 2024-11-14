@@ -16,9 +16,9 @@ export const loginApi = createApi({
       query: (payload) => ({
         url: "auth/login",
         method: "POST",
-        data: payload, // Ensure 'data' is used for the Axios request body
+        data: payload,
         headers: {
-          "Content-Type": "application/json", // Set content-type explicitly if needed
+          "Content-Type": "application/json",
         },
       }),
       transformResponse: (response: LoginRoot) => {

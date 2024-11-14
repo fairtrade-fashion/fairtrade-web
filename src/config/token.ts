@@ -8,3 +8,5 @@ export const fetchToken = (key: string) => {
 export const removeToken = (key: string) => {
   localStorage.removeItem(key);
 };
+
+localStorage.setItem("isAuthenticated", "true");

@@ -1,5 +1,5 @@
+import { CartItem } from "@/models/response/cartI_items";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartItem } from "@/lib/product";
 
 // Define the initial state for the cart
 export interface CartState {

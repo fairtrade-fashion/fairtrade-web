@@ -10,6 +10,8 @@ import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "@/assets/images/BlackLogo.png";
 import { LoginValue } from "@/models/request/login_value.model";
 import { LoginRoot } from "@/models/response/login.model";
+import { setAuth } from "@/redux/slices/auth.slice";
+import { useDispatch } from "react-redux";
 
 interface ApiError {
   data?: {
@@ -32,6 +34,7 @@ const Login: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Handle form submission
   const handleSubmit = async (values: LoginValue) => {
@@ -41,6 +44,7 @@ const Login: React.FC = () => {
       if (response.access_token) {
         console.log("Login successful", response);
         localStorage.setItem("access_token", response.access_token);
+        dispatch(setAuth(true));
         toast.success("Login successful");
         navigate("/");
       }
