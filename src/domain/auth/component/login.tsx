@@ -37,29 +37,32 @@ const Login: React.FC = () => {
   const dispatch = useDispatch();
 
   // Handle form submission
-  const handleSubmit = async (values: LoginValue) => {
-    console.log("Submitting form with values:", values);
-    try {
-      const response: LoginRoot = await login(values).unwrap();
-      if (response.access_token) {
-        console.log("Login successful", response);
-        localStorage.setItem("access_token", response.access_token);
-        dispatch(setAuth(true));
-        toast.success("Login successful");
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Login failed", error);
-      const apiError = error as ApiError;
-      let errorMessage = "Login failed";
-      if (apiError.data) {
-        errorMessage = apiError.data.message || "An error occurred";
-      } else if (apiError.status === 401) {
-        errorMessage = "Invalid credentials";
-      }
-      toast.error(errorMessage);
-    }
-  };
+ const handleSubmit = async (values: LoginValue) => {
+   console.log("Submitting form with values:", values);
+   try {
+     const response: LoginRoot = await login(values).unwrap();
+     if (response.access_token) {
+       console.log("Login successful", response);
+       localStorage.setItem("access_token", response.access_token);
+       dispatch(setAuth(true));
+       toast.success("Login successful");
+       navigate("/");
+     }
+   } catch (error) {
+     console.error("Login failed", error);
+     const apiError = error as ApiError;
+     let errorMessage = "Login failed";
+     if (apiError.data?.message) {
+       errorMessage = apiError.data.message;
+     } else if (apiError.status === 401) {
+       errorMessage = "Invalid credentials";
+     } else {
+       errorMessage = "An unexpected error occurred";
+     }
+     toast.error(errorMessage);
+   }
+ };
+
 
   return (
     <div className="flex h-screen bg-gray-800 lg:bg-gray-50">

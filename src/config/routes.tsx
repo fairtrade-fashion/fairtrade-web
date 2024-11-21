@@ -11,6 +11,7 @@ import ResetPassword from "@/domain/auth/component/reset_password";
 import UpdatePassword from "@/domain/auth/component/update_pasword";
 import SignupPage from "@/domain/auth/component/signup";
 import ProfilePage from "@/domain/profile/component/profile.page";
+import OrderPage from "@/domain/profile/component/order";
 
 export default function appRouter(): RouteObject[] {
   return [
@@ -39,6 +40,10 @@ export default function appRouter(): RouteObject[] {
         {
           path: "/checkout",
           element: <CheckoutPage />,
+        },
+        {
+          path: "/order",
+          element: <OrderPage />,
         },
       ],
     },

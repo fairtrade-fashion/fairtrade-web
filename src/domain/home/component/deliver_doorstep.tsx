@@ -9,7 +9,7 @@ export default function DeliverDoorstep() {
           muted
           className="absolute w-full h-full object-cover"
         >
-          <source src="src/assets/videos/customer.mp4" type="video/mp4" />
+          <source src="src/assets/videos/fairtrade.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-black opacity-30"></div>
