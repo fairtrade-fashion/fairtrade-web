@@ -81,6 +81,9 @@
 
 
 
+import { EmptyResource } from "@/components/common/error";
+import { formatCurrency } from "@/components/common/helpers";
+import { Loader } from "@/components/common/loader";
 import { useFetchCategoryProductsQuery } from "@/domain/categories/categories.api/category.api";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -105,7 +108,7 @@ export default function CategoryProduct({
   const {
     data: CategoryProducts,
     isLoading,
-    isError,
+    error,
   } = useFetchCategoryProductsQuery(
     {
       id: id as string,
@@ -124,25 +127,12 @@ export default function CategoryProduct({
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-gray-800 border-solid"></div>
-          <p className="mt-4 text-lg text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
+  return <Loader />;
+}
 
-  if (isError) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-lg font-medium text-red-600">
-          Failed to load products.
-        </p>
-      </div>
-    );
-  }
+if (error || !CategoryProducts) {
+  return <EmptyResource resourceName="Products" />;
+}
 
   // console.log("Fetched Products:", CategoryProducts);
 
@@ -176,7 +166,7 @@ export default function CategoryProduct({
                 {product.name}
               </h3>
               <p className="mt-1.5 text-sm text-gray-700">
-                ₦{product.price.toLocaleString()}
+                {formatCurrency(product.price)}
               </p>
               <button
                 onClick={() => handleBuyNow(product.id)}
