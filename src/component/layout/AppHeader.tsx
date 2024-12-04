@@ -8,6 +8,7 @@ import { IoCloseSharp, IoPersonSharp } from "react-icons/io5";
 import CartNotification from "../../domain/cart/cart_notification";
 import { useFetchCategoryQuery } from "@/domain/categories/categories.api/category.api";
 import { useGetOrCreateCartQuery } from "@/domain/cart/cart_api/cart.api";
+import logo from "@/assets/images/Website-Logo.png"; 
 
 export default function AppHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,8 +55,8 @@ export default function AppHeader() {
         <div className="container mx-auto py-2 flex justify-between items-center">
           <Link to="/home">
             <img
-              className="w-28 h-7 md:w-36 md:h-10"
-              src="/src/assets/images/fair-trade-transparent.png"
+              className="w-24 h-10 md:w-32 md:h-14"
+              src={logo}
               alt="Fair Trade Logo"
             />
           </Link>

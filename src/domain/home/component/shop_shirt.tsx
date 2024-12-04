@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useFetchCategoryProductsQuery } from "@/domain/categories/categories.api/category.api";
+import { Loader } from "@/components/common/loader";
+import { EmptyResource } from "@/components/common/error";
 
 export default function ShopShirt() {
   const navigate = useNavigate();
 
   // Hardcoded ID for the "Shirt" category
-  const categoryId = "b122e016-3b30-4392-8ed6-9e9cb24772f7";
+  const categoryId = "4b9b7a0c-1a24-4563-9a94-151493fa46c9";
   const categoryName = "shirt";
   const { data, isLoading, isError } = useFetchCategoryProductsQuery({
     id: categoryId,
@@ -23,12 +25,13 @@ export default function ShopShirt() {
         </h1>
 
         {/* Handle Loading and Error States */}
-        {isLoading && <p className="text-center mt-4">Loading shirts...</p>}
-        {isError && (
-          <p className="text-center mt-4 text-red-500">
-            Failed to load shirts.
+        {isLoading && (
+          <p className="text-center mt-4">
+            <Loader />
+            Loading shirts...
           </p>
         )}
+        {isError && <EmptyResource resourceName="Shirt" />}
 
         {/* Products Grid */}
         {!isLoading && !isError && (
