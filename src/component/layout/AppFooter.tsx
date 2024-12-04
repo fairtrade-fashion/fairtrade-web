@@ -1,6 +1,7 @@
 import { useFetchCategoryQuery } from "@/domain/categories/categories.api/category.api";
 import SubscribeNow from "@/domain/home/component/subscribe_now";
 import { Link, NavLink } from "react-router-dom";
+import logo from "@/assets/images/Website-Logo.png"; 
 
 export default function AppFooter() {
   const { data } = useFetchCategoryQuery();
@@ -41,8 +42,8 @@ export default function AppFooter() {
           <div className="">
             <Link to="/home">
               <img
-                className="w-32 md:w-40 h-10 md:h-16"
-                src="/src/assets/images/fair-trade-transparent.png"
+                className="w-24 h-10 md:w-32 md:h-14"
+                src={logo}
                 alt="Fair Trade Logo"
               />
             </Link>
@@ -52,7 +53,7 @@ export default function AppFooter() {
                 href="tel:+2349156057436"
                 className="text-gray-500 text-sm md:text-base"
               >
-                +234 915 605 7436
+                +234 704 987 7170
               </a>
 
               <h1 className="md:text-lg">Email: </h1>
@@ -108,7 +109,7 @@ export default function AppFooter() {
         </div>
       </footer>
       <div className="flex text-xs w-full py-4 items-center justify-center border-t-2 border-gray-800 text-gray-400">
-        Copyright © 2023 FAIR TRADE. All Rights Reserved
+        Copyright © 2024 FAIRTRADE. All Rights Reserved
       </div>
     </>
   );
