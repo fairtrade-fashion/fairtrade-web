@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { removeToken } from "@/config/token";
 import { setAuth } from "@/redux/slices/auth.slice";
 import { useDispatch } from "react-redux";
+import { Loader } from "@/components/common/loader";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -44,13 +45,7 @@ export default function ProfilePage() {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-gray-800 border-solid"></div>
-          <p className="mt-4 text-lg text-gray-600">Loading...</p>
-        </div>
-      </div>
+    return (<Loader />
     );
   }
 
@@ -71,10 +66,16 @@ export default function ProfilePage() {
 
         <div className="mt-8 border-t border-gray-200 pt-4">
           <h3 className="text-xl font-semibold mb-4">Account Actions</h3>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+            <button
+              onClick={() => navigate("/order")}
+              className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+            >
+              View Order
+            </button>
             <button
               onClick={() => navigate("/cart")}
-              className="px-6 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900"
+              className="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-900"
             >
               View Cart
             </button>

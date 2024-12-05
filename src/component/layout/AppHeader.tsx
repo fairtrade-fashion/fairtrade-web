@@ -3,19 +3,20 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp, IoPersonSharp } from "react-icons/io5";
 import CartNotification from "../../domain/cart/cart_notification";
 import { useFetchCategoryQuery } from "@/domain/categories/categories.api/category.api";
-import { RootState } from "@/config/store";
+import { useGetOrCreateCartQuery } from "@/domain/cart/cart_api/cart.api";
 
 export default function AppHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const cartItemCount = useSelector(
-    (state: RootState) => state.cart.cart.length
-  );
   const { data } = useFetchCategoryQuery();
+  
+  const { data: cartData } = useGetOrCreateCartQuery("");
+  const cartItemCount = cartData?.items.length || 0;
+  
+  
 
   const menuIcons = [
     { icons: <FaFacebookSquare />, link: "#" },
@@ -50,7 +51,7 @@ export default function AppHeader() {
   return (
     <>
       <div className="bg-gray-50">
-        <div className="container mx-auto py-2 md:py-4 xl:py-7 flex justify-between items-center">
+        <div className="container mx-auto py-2 flex justify-between items-center">
           <Link to="/home">
             <img
               className="w-28 h-7 md:w-36 md:h-10"

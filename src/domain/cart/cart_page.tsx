@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Trash2, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import { StreamLinedCartRoot } from "@/models/response/cartI_items";
+import { Loader } from "@/components/common/loader";
 
 const CartPage: React.FC = () => {
   const isAuthenticated = useSelector(
@@ -155,12 +156,7 @@ const CartPage: React.FC = () => {
 
   if (isLoadingCart) {
     return (
-      <div className="container mx-auto px-4 py-8 flex justify-center items-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-2">
-          <Loader2 className="h-8 w-8 animate-spin text-gray-500" />
-          <p className="text-gray-500">Loading cart...</p>
-        </div>
-      </div>
+      <Loader/>
     );
   }
 

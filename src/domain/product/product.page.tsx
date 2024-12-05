@@ -6,6 +6,8 @@ import { addToCart } from "@/redux/slices/cart.slice";
 import { useFetchProductIdQuery } from "./product.api/product.api";
 import { useAddItemToCartMutation, useGetOrCreateCartQuery } from "../cart/cart_api/cart.api";
 import { ProfileRoot } from "@/models/response/profile.model";
+import { formatCurrency } from "@/components/common/helpers";
+import { Loader } from "@/components/common/loader";
 
 const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,13 +27,7 @@ const ProductPage: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-gray-800 border-solid"></div>
-          <p className="mt-4 text-lg text-gray-600">Loading...</p>
-        </div>
-      </div>
+    return (<Loader/>
     );
   }
 
@@ -77,7 +73,7 @@ const ProductPage: React.FC = () => {
     );
     addItemToCart({
       cartId: cart?.id || "",
-      productId: productData.id,
+      productId: productData?.id,
       quantity: 1,
     });
     toast.success("Item added to cart!");
@@ -122,7 +118,7 @@ const ProductPage: React.FC = () => {
           </p>
           <div className="flex items-center mt-4">
             <span className="text-2xl font-semibold text-black">
-              ₦{productData.price}
+              {formatCurrency(productData.price)}
             </span>
           </div>
 
