@@ -7,20 +7,25 @@ import userReducer from "@/redux/slices/user.slice";
 import { api } from "@/apis/api";
 import { loginApi } from "@/domain/auth/api/login.api";
 import authReducer from "../redux/slices/auth.slice"
+import { registerApi } from "@/domain/auth/api/register.api";
 
 export const store = configureStore({
   reducer: {
     [loginApi.reducerPath]: loginApi.reducer,
+    [registerApi.reducerPath]: registerApi.reducer,
     [api.reducerPath]: api.reducer,
     user: userReducer,
     category: categoryReducer,
     products: productReducer,
     auth: authReducer,
     cart: cartReducer,
-    
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({serializableCheck: false}).concat([api.middleware, loginApi.middleware]),
+    getDefaultMiddleware({ serializableCheck: false }).concat([
+      api.middleware,
+      loginApi.middleware,
+      registerApi.middleware,
+    ]),
 });
 
 // Infer the `RootState` and `AppDispatch` typ0es from the store itself
