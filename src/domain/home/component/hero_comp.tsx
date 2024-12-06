@@ -1,3 +1,5 @@
+import fairtradeVideo from "@/assets/videos/fairtrade.mp4";
+
 export default function HeroComp() {
   return (
     <>
@@ -9,7 +11,7 @@ export default function HeroComp() {
           playsInline
           className="absolute w-full h-full object-cover"
         >
-          <source src="src/assets/videos/fairtrade.mp4" type="video/mp4" />
+          <source src={fairtradeVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-black opacity-30"></div>
