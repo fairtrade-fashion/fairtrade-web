@@ -1,9 +1,9 @@
-import { fetchToken } from '@/config/token';
-import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
+import { fetchToken } from "@/config/token";
+import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://x80w80sk0wosss48gwkc88o0.45.136.18.133.sslip.io/api/v2/",
+  baseUrl: "https://fairtrade-server.onrender.com/api/v2/",
   prepareHeaders: (headers) => {
     const token = fetchToken("access_token");
     // console.log("Fetched Token:", token);
@@ -19,7 +19,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-export const baseQueryWithRetry = retry(baseQuery, { maxRetries: 2 })
+export const baseQueryWithRetry = retry(baseQuery, { maxRetries: 2 });
 export const api = createApi({
   reducerPath: "splitApi",
   baseQuery: baseQueryWithRetry,
@@ -39,6 +39,6 @@ export const api = createApi({
 
 export const enhancedApi = api.enhanceEndpoints({
   endpoints: () => ({
-    getPost: () => 'test',
+    getPost: () => "test",
   }),
-})
+});
