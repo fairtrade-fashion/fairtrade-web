@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
 import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -20,8 +19,12 @@ export default function AppHeader() {
   
 
   const menuIcons = [
-    { icons: <FaFacebookSquare />, link: "#" },
-    { icons: <GrInstagram />, link: "#" },
+    { icons: <GrInstagram />, link: "http://Instagram.com/fairrtradee" },
+    {
+      icons: <FaYoutube />,
+      link: "https://youtube.com/@fairrtradee?si=FLwO4hd-W65hGqcu",
+    },
+    { icons: <FaXTwitter />, link: "https://x.com/faiirtradee?s=21" },
     {
       icons: (
         <Link to="/profile">
@@ -128,11 +131,11 @@ export default function AppHeader() {
 
           <div className="flex flex-col items-center mt-10 space-y-6">
             {data
-              ?.filter((category) => category.parentId === null) // Only show parent categories
+              ?.filter((category) => category.parentId === null)
               .map((eachMenuItem) => (
                 <Link
                   key={eachMenuItem.id}
-                  to={`category/${eachMenuItem.name}`}
+                  to={`category/${eachMenuItem.name}/${eachMenuItem.id}`}
                   onClick={toggleMenu}
                   className="text-xl font-medium text-gray-700"
                 >

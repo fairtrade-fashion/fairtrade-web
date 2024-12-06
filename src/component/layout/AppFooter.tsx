@@ -2,9 +2,23 @@ import { useFetchCategoryQuery } from "@/domain/categories/categories.api/catego
 import SubscribeNow from "@/domain/home/component/subscribe_now";
 import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/images/Website-Logo.png"; 
+import { GrInstagram } from "react-icons/gr";
+import { FaXTwitter, FaYoutube } from "react-icons/fa6";
+
 
 export default function AppFooter() {
   const { data } = useFetchCategoryQuery();
+
+
+  const menuIcons = [
+    { icons: <GrInstagram />, link: "http://Instagram.com/fairrtradee" },
+    {
+      icons: <FaYoutube />,
+      link: "https://youtube.com/@fairrtradee?si=FLwO4hd-W65hGqcu",
+    },
+    { icons: <FaXTwitter />, link: "https://x.com/faiirtradee?s=21" },
+  ];
+
 
   // const menuItems = [
   //   {
@@ -89,10 +103,24 @@ export default function AppFooter() {
                 ))}
             </ul>
           </div>
-          <div className="mt-4 lg:mt-0">
-            <h1 className="text-xl md:text-2xl font-bold">Address:</h1>
+          <div className="lg:mt-0">
+            <h1 className="text-xl md:text-2xl font-bold">Social media</h1>
             <p className="text-xs md:text-base font-normal md:mt-5">
-              Shop 123, Port-Hacort Road, Rivers State
+              <ul className="items-center flex gap-4 text-xl font-medium">
+                {menuIcons.map((eachMenuItem) => (
+                  <li
+                    key={eachMenuItem.link}
+                    className="font-medium pt-2 hover:text-gray-400 after:transition-all after:duration-700"
+                  >
+                    <Link
+                      to={eachMenuItem.link}
+                      className="hover:text-gray-400"
+                    >
+                      {eachMenuItem.icons}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </p>
           </div>
           <div>
