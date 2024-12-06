@@ -1,3 +1,4 @@
+import fairtradeVideo from "@/assets/videos/fairtrade.mp4";
 
 export default function DeliverDoorstep() {
   return (
@@ -9,14 +10,14 @@ export default function DeliverDoorstep() {
           muted
           className="absolute w-full h-full object-cover"
         >
-          <source src="src/assets/videos/fairtrade.mp4" type="video/mp4" />
+          <source src={fairtradeVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-black opacity-30"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
-          <h1 className="text-3xl px-4 md:text-4xl font-bold">
-           We Deliver To Your Door Step
-          </h1>
+          {/* <h1 className="text-3xl px-4 md:text-4xl font-bold">
+            We Deliver To Your Door Step
+          </h1> */}
           {/* <button className="mt-8 px-12 py-3 text-lg bg-white hover:bg-transparent border-4 border-white hover:border-4 hover:border-white hover:text-white text-black font-bold rounded-md transition-all duration-300">
             Shop Now
           </button> */}
