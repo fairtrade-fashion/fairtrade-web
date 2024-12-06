@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://fairtrade-server.onrender.com/api/v2/",
+  baseUrl: "//https://fairtrade-server.onrender.com/api/v2/", //https://fairtrade-server.onrender.com/api/v2/
   prepareHeaders: (headers) => {
     const token = fetchToken("access_token");
     // console.log("Fetched Token:", token);

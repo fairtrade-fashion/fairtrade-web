@@ -1,17 +1,25 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { addToCart } from "@/redux/slices/cart.slice";
 import { useFetchProductIdQuery } from "./product.api/product.api";
-import { useAddItemToCartMutation, useGetOrCreateCartQuery } from "../cart/cart_api/cart.api";
+import {
+  useAddItemToCartMutation,
+  useGetOrCreateCartQuery,
+} from "../cart/cart_api/cart.api";
 import { ProfileRoot } from "@/models/response/profile.model";
 import { formatCurrency } from "@/components/common/helpers";
 import { Loader } from "@/components/common/loader";
 
 const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  // Get user token or user info from localStorage or Redux
+  const token = localStorage.getItem("access_token") || "";
   const userId = useSelector((state: ProfileRoot) => state.userId);
+
   const { data: cart } = useGetOrCreateCartQuery(userId);
   const [addItemToCart] = useAddItemToCartMutation();
   const {
@@ -19,16 +27,21 @@ const ProductPage: React.FC = () => {
     isLoading,
     isError,
   } = useFetchProductIdQuery(id as string);
-  console.log("Fetching product with ID:", id);
 
   const dispatch = useDispatch();
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
+  // Redirect to login if no token is found
+  useEffect(() => {
+    if (!token) {
+      navigate("/login"); // Navigate to login page if not logged in
+    }
+  }, [token, navigate]);
+
   if (isLoading) {
-    return (<Loader/>
-    );
+    return <Loader />;
   }
 
   // Error or Product not found
@@ -67,10 +80,12 @@ const ProductPage: React.FC = () => {
           categoryId: "",
           createdAt: "",
           updatedAt: "",
-          averageRating: null
-        }
+          averageRating: null,
+          images: ""
+        },
       })
     );
+
     addItemToCart({
       cartId: cart?.id || "",
       productId: productData?.id,
@@ -93,17 +108,17 @@ const ProductPage: React.FC = () => {
           <div className="flex space-x-4">
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
-              src={productData.images[0].url} // Update to use different URLs if available
+              src={productData.images[0].url}
               alt="Thumbnail 1"
             />
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
-              src={productData.images[1]?.url || productData.images[0].url} // Fallback to the first image if not available
+              src={productData.images[1]?.url || productData.images[0].url}
               alt="Thumbnail 2"
             />
             <img
               className="w-20 h-20 object-cover rounded-lg border cursor-pointer hover:opacity-80"
-              src={productData.images[2]?.url || productData.images[0].url} // Fallback to the first image if not available
+              src={productData.images[2]?.url || productData.images[0].url}
               alt="Thumbnail 3"
             />
           </div>

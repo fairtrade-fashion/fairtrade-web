@@ -1,3 +1,3 @@
-const localUrl = "https://fairtrade-server.onrender.com/api/v2/";
+const localUrl = "//https://fairtrade-server.onrender.com/api/v2/"; //https://fairtrade-server.onrender.com/api/v2/
 
 export const BASE_URL = localUrl;

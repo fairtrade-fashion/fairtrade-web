@@ -2,9 +2,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFetchCategoryProductsQuery } from "@/domain/categories/categories.api/category.api";
 import { Loader } from "@/components/common/loader";
 import { EmptyResource } from "@/components/common/error";
+import { useState } from "react";
 
 export default function ShopShirt() {
   const navigate = useNavigate();
+
+  const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
+
+  const handleImageHover = (productId: string) => {
+    setHoveredProductId(productId);
+  };
+
+  const handleImageLeave = () => {
+    setHoveredProductId(null);
+  };
 
   // Hardcoded ID for the "Shirt" category
   const categoryId = "4b9b7a0c-1a24-4563-9a94-151493fa46c9";
@@ -41,9 +52,17 @@ export default function ShopShirt() {
                 key={item.id}
                 className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border w-auto"
               >
-                <div className="relative mx-2 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border">
+                <div
+                  className="relative mx-2 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border"
+                  onMouseEnter={() => handleImageHover(item.id)}
+                  onMouseLeave={handleImageLeave}
+                >
                   <img
-                    src={item.images[0]?.url}
+                    src={
+                      hoveredProductId === item.id
+                        ? item.images[1]?.url || "fallback_image_url.jpg"
+                        : item.images[0]?.url || "fallback_image_url.jpg"
+                    }
                     alt={item.name}
                     className="object-cover w-full h-52 lg:h-96 hover:bg-white hover:blur-xs hover:opacity-80"
                   />
