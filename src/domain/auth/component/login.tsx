@@ -85,11 +85,19 @@ const Login: React.FC = () => {
       </div>
 
       <motion.div
-        className="w-full lg:w-1/2 flex items-center justify-center px-4"
+        className="w-full lg:w-1/2 lg:flex items-center justify-center px-4"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
+        <div className="lg:hidden p-4 mt-4">
+          <Link
+            to="/"
+            className="hover:text-gray-50 flex gap-1 items-center rounded-lg border-2 w-28 hover:border-2 hover:bg-gray-800 hover:border-gray-50 px-2 text-gray-800 bg-gray-50 transition-all transform ease-in-out duration-500 text-lg font-semibold"
+          >
+            <ArrowBigLeftDashIcon /> Home
+          </Link>
+        </div>
         <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-lg">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-gray-900">
