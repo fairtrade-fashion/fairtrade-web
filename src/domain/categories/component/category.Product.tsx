@@ -138,11 +138,11 @@ if (error || !CategoryProducts) {
 
   return (
     <div>
-      <h1 className="text-3xl uppercase text-center md:my-5 lg:my-10 font-bold my-5">
+      <h1 className="text-3xl uppercase text-center lg:my-10 font-bold my-5">
         {category}
       </h1>
 
-      <div className="grid grid-cols-1 px-5 md:px-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-5 mt-10">
+      <div className="grid grid-cols-1 px-5 md:px-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-5 my-10">
         {CategoryProducts?.products.length === 0 && (
           <p>No products found for this category.</p>
         )}

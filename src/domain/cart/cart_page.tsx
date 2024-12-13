@@ -1,7 +1,7 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "@/config/store";
+// import { RootState } from "@/config/store";
 import {
   clearCart,
   removeFromCart,
@@ -27,9 +27,12 @@ import { StreamLinedCartRoot } from "@/models/response/cartI_items";
 import { Loader } from "@/components/common/loader";
 
 const CartPage: React.FC = () => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
+  // const isAuthenticated = useSelector(
+  //   (state: RootState) => state.auth.isAuthenticated
+  // );
+
+  const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,6 +45,15 @@ const CartPage: React.FC = () => {
 
   const streamLinedCartData = cartData as unknown as StreamLinedCartRoot;
 
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      navigate("/login");
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [navigate]);
+  
   const handleQuantityChange = async (
     id: string,
     selectedSize: string,
@@ -88,7 +100,7 @@ const CartPage: React.FC = () => {
     amount: number,
     description: string,
     content: string,
-    product: {
+    _product: {
       id: string;
       name: string;
       description: string;
@@ -99,6 +111,7 @@ const CartPage: React.FC = () => {
       createdAt: string;
       updatedAt: string;
       averageRating: number | null;
+      images: string;
     }
   ) => {
     try {
@@ -117,7 +130,19 @@ const CartPage: React.FC = () => {
           amount,
           description,
           content,
-          product,
+          product: {
+            id: "",
+            name: "",
+            description: "",
+            price: 0,
+            sku: "",
+            stock: 0,
+            categoryId: "",
+            createdAt: "",
+            updatedAt: "",
+            averageRating: null,
+            images: "",
+          },
         })
       );
       toast("Item Removed", {
@@ -155,9 +180,7 @@ const CartPage: React.FC = () => {
   };
 
   if (isLoadingCart) {
-    return (
-      <Loader/>
-    );
+    return <Loader />;
   }
 
   const cartItems = cartData?.items || [];
@@ -182,7 +205,7 @@ const CartPage: React.FC = () => {
                 >
                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                     <img
-                      src={item.image}
+                      src={item.product.images[0].url}
                       alt={item.product.name}
                       className="h-full w-full object-cover object-center"
                     />

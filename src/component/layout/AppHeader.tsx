@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
 import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,6 +7,7 @@ import { IoCloseSharp, IoPersonSharp } from "react-icons/io5";
 import CartNotification from "../../domain/cart/cart_notification";
 import { useFetchCategoryQuery } from "@/domain/categories/categories.api/category.api";
 import { useGetOrCreateCartQuery } from "@/domain/cart/cart_api/cart.api";
+import logo from "@/assets/images/Website-Logo.png"; 
 
 export default function AppHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,8 +19,12 @@ export default function AppHeader() {
   
 
   const menuIcons = [
-    { icons: <FaFacebookSquare />, link: "#" },
-    { icons: <GrInstagram />, link: "#" },
+    { icons: <GrInstagram />, link: "http://Instagram.com/fairrtradee" },
+    {
+      icons: <FaYoutube />,
+      link: "https://youtube.com/@fairrtradee?si=FLwO4hd-W65hGqcu",
+    },
+    { icons: <FaXTwitter />, link: "https://x.com/faiirtradee?s=21" },
     {
       icons: (
         <Link to="/profile">
@@ -54,8 +58,8 @@ export default function AppHeader() {
         <div className="container mx-auto py-2 flex justify-between items-center">
           <Link to="/home">
             <img
-              className="w-28 h-7 md:w-36 md:h-10"
-              src="/src/assets/images/fair-trade-transparent.png"
+              className="w-24 h-10 md:w-32 md:h-14"
+              src={logo}
               alt="Fair Trade Logo"
             />
           </Link>
@@ -125,13 +129,13 @@ export default function AppHeader() {
             </button>
           </div>
 
-          <div className="flex flex-col items-center mt-10 space-y-6">
+          <div className="flex flex-col items-center capitalize mt-10 space-y-6">
             {data
-              ?.filter((category) => category.parentId === null) // Only show parent categories
+              ?.filter((category) => category.parentId === null)
               .map((eachMenuItem) => (
                 <Link
                   key={eachMenuItem.id}
-                  to={`category/${eachMenuItem.name}`}
+                  to={`category/${eachMenuItem.name}/${eachMenuItem.id}`}
                   onClick={toggleMenu}
                   className="text-xl font-medium text-gray-700"
                 >

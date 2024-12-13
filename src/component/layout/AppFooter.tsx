@@ -1,9 +1,24 @@
 import { useFetchCategoryQuery } from "@/domain/categories/categories.api/category.api";
 import SubscribeNow from "@/domain/home/component/subscribe_now";
 import { Link, NavLink } from "react-router-dom";
+import logo from "@/assets/images/Website-Logo.png"; 
+import { GrInstagram } from "react-icons/gr";
+import { FaXTwitter, FaYoutube } from "react-icons/fa6";
+
 
 export default function AppFooter() {
   const { data } = useFetchCategoryQuery();
+
+
+  const menuIcons = [
+    { icons: <GrInstagram />, link: "http://Instagram.com/fairrtradee" },
+    {
+      icons: <FaYoutube />,
+      link: "https://youtube.com/@fairrtradee?si=FLwO4hd-W65hGqcu",
+    },
+    { icons: <FaXTwitter />, link: "https://x.com/faiirtradee?s=21" },
+  ];
+
 
   // const menuItems = [
   //   {
@@ -41,8 +56,8 @@ export default function AppFooter() {
           <div className="">
             <Link to="/home">
               <img
-                className="w-32 md:w-40 h-10 md:h-16"
-                src="/src/assets/images/fair-trade-transparent.png"
+                className="w-24 h-10 md:w-32 md:h-14"
+                src={logo}
                 alt="Fair Trade Logo"
               />
             </Link>
@@ -52,7 +67,7 @@ export default function AppFooter() {
                 href="tel:+2349156057436"
                 className="text-gray-500 text-sm md:text-base"
               >
-                +234 915 605 7436
+                +234 704 987 7170
               </a>
 
               <h1 className="md:text-lg">Email: </h1>
@@ -88,10 +103,24 @@ export default function AppFooter() {
                 ))}
             </ul>
           </div>
-          <div className="mt-4 lg:mt-0">
-            <h1 className="text-xl md:text-2xl font-bold">Address:</h1>
+          <div className="lg:mt-0">
+            <h1 className="text-xl md:text-2xl font-bold">Social media</h1>
             <p className="text-xs md:text-base font-normal md:mt-5">
-              Shop 123, Port-Hacort Road, Rivers State
+              <ul className="items-center flex gap-4 text-xl font-medium">
+                {menuIcons.map((eachMenuItem) => (
+                  <li
+                    key={eachMenuItem.link}
+                    className="font-medium pt-2 hover:text-gray-400 after:transition-all after:duration-700"
+                  >
+                    <Link
+                      to={eachMenuItem.link}
+                      className="hover:text-gray-400"
+                    >
+                      {eachMenuItem.icons}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </p>
           </div>
           <div>
@@ -108,7 +137,7 @@ export default function AppFooter() {
         </div>
       </footer>
       <div className="flex text-xs w-full py-4 items-center justify-center border-t-2 border-gray-800 text-gray-400">
-        Copyright © 2023 FAIR TRADE. All Rights Reserved
+        Copyright © 2024 FAIRTRADE. All Rights Reserved
       </div>
     </>
   );

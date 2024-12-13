@@ -11,9 +11,9 @@ export default function HomeView() {
     <div>
       <HeroComp />
       <NewArrival />
+      <ShopShirt />
       <ShopTshirts />
       <ShopJeans />
-      <ShopShirt />
       <DeliverDoorstep />
       <ShopAccessories />
     </div>

@@ -12,6 +12,7 @@ export interface CartItem {
   description: string;
   content: string;
   product: {
+    images: any;
     id: string;
     name: string;
     description: string;
