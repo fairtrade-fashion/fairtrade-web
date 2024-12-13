@@ -67,10 +67,12 @@ export default function ShopShirt() {
                     className="object-cover w-full h-52 lg:h-96 hover:bg-white hover:blur-xs hover:opacity-80"
                   />
                 </div>
-                <div className="items-center p-2 text-center justify-center gap-4 md:mb-2">
-                  <p className="text-sm md:text-base antialiased font-bold capitalize leading-relaxed text-gray-900">
+                <div className="flex flex-col items-center p-2 text-center justify-between gap-4 md:mb-2 flex-1">
+                  {/* Product Name */}
+                  <p className="text-sm md:text-base antialiased font-bold capitalize leading-relaxed text-gray-900 h-10 overflow-hidden">
                     {item.name}
                   </p>
+                  {/* Product Price */}
                   <p className="text-sm md:text-base antialiased font-medium leading-relaxed md:0 text-gray-500">
                     ₦{item.price}
                   </p>

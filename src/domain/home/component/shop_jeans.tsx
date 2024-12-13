@@ -18,8 +18,8 @@ export default function ShopJeans() {
   };
 
   // Hardcoded ID for the "Jeans" category
-  const categoryId = "d576a652-f95c-49e6-918d-3635c50d23ca";
-  const categoryName = "jean";
+  const categoryId = "c355acaa-98d2-4c28-ac58-7e884389b388";
+  const categoryName = "women";
   const { data, isLoading, isError } = useFetchCategoryProductsQuery({
     id: categoryId,
   });
@@ -31,17 +31,17 @@ export default function ShopJeans() {
     <section className="bg-gray-50">
       <div className="w-full">
         <h1 className="text-center text-3xl font-semibold text-gray-800 mt-16">
-          Shop Jeans
+          Shop For Women Wears
         </h1>
 
         {/* Handle Loading and Error States */}
         {isLoading && (
           <p className="text-center mt-4">
             <Loader />
-            Loading jeans...
+            Loading women wears...
           </p>
         )}
-        {isError && <EmptyResource resourceName="Jeans" />}
+        {isError && <EmptyResource resourceName="women wears" />}
 
         {/* Products Grid */}
         {!isLoading && !isError && (

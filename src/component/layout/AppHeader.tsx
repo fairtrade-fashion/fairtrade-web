@@ -129,7 +129,7 @@ export default function AppHeader() {
             </button>
           </div>
 
-          <div className="flex flex-col items-center mt-10 space-y-6">
+          <div className="flex flex-col items-center capitalize mt-10 space-y-6">
             {data
               ?.filter((category) => category.parentId === null)
               .map((eachMenuItem) => (

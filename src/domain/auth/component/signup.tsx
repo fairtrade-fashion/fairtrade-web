@@ -81,11 +81,19 @@ const SignupPage: React.FC = () => {
         </div>
       </div>
       <motion.div
-        className="w-full lg:w-1/2 flex items-center justify-center px-4"
+        className="w-full lg:w-1/2 lg:flex items-center justify-center px-4"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
+        <div className="lg:hidden p-4 mt-4">
+          <Link
+            to="/"
+            className="hover:text-gray-50 flex gap-1 items-center rounded-lg border-2 w-28 hover:border-2 hover:bg-gray-800 hover:border-gray-50 px-2 text-gray-800 bg-gray-50 transition-all transform ease-in-out duration-500 text-lg font-semibold"
+          >
+            <ArrowBigLeftDashIcon /> Home
+          </Link>
+        </div>
         <div className="bg-white w-full max-w-md shadow-lg rounded-lg p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Create an Account

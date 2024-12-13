@@ -18,8 +18,8 @@ const handleImageLeave = () => {
 };
 
   // Hardcoded ID for the "Accessories" category
-  const categoryId = "d576a652-f95c-49e6-918d-3635c50d23ca";
-  const categoryName = "accessories";
+  const categoryId = "f4b7e2ec-8031-448a-ab49-e4986e07551c";
+  const categoryName = "collection";
   const { data, isLoading, isError } = useFetchCategoryProductsQuery({
     id: categoryId,
   });
@@ -32,17 +32,17 @@ const handleImageLeave = () => {
     <section className="bg-gray-50 mb-8">
       <div className="w-full">
         <h1 className="text-center text-3xl font-semibold text-gray-800 mt-16">
-          Shop Shirt
+          Collections
         </h1>
 
         {/* Handle Loading and Error States */}
         {isLoading && (
           <p className="text-center mt-4">
             <Loader />
-            Loading accessories...
+            Loading collections...
           </p>
         )}
-        {isError && <EmptyResource resourceName="Accessories" />}
+        {isError && <EmptyResource resourceName="Collection" />}
 
         {/* Products Grid */}
         {!isLoading && !isError && (
